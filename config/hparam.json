@@ -1,0 +1,41 @@
+{
+	"phoneme_max_sequence": 320,
+	"max_mel_frames": 1024,
+
+	"n_mel": 80,
+	"hop_size": 256,
+	"n_fft": 1024,
+	"sample_rate": 22050,
+
+	"epoch": 20000,
+	"checkpoint_step": 5000,
+	"eval_step": 5000,
+
+	"embed_dim": 512,
+	"pos_embed_dim": 256,
+	"prenet_encoder_kernel": 3,
+	"kernel_post": 5,
+
+	"d_model": 256,
+	"n_head": 4,
+	"n_layer": 3,
+	"batch_size": 32,
+	"dim_feedforward": 1024,
+
+	"prenet_out": 256,
+	"linear_dim": 256,
+	"post_dim": 1024,
+	"learning_rate": 0.0002,
+
+	"dropout_prenet": 0.5,
+	"dropout_post": 0.3,
+
+	"data_file": "preprocessed_text.txt",
+	"root_dir": "preprocessed_data",
+	"spectogram_dir": "mel_spectrogram",
+	"orig_duration": "mel_original_duration.csv",
+	"log_dir": "log_dir",
+
+	"checkpoint_dir": "checkpoint"
+
+}

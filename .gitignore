@@ -1,0 +1,12 @@
+train-clean-100
+*.wav
+LJSpeech-1.1*
+t.py
+k.py
+__py*
+note.txt
+checkpoint.pt
+mel_spectrogram
+*.zip
+*.pt
+*.bin
