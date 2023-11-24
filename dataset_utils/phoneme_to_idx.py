@@ -28,20 +28,11 @@ def get_pad_index():
     return mapped_phoneme['<pad>']
 
 
-def padder(idx_phoneme, max_len):
-    seq_len = len(idx_phoneme)
-    if seq_len < 320:
-        idx_phoneme.extend(
-                [mapped_phoneme['<pad>']
-                 for _ in range(max_len - seq_len)])
-    return idx_phoneme
-
-
-def phoneme_to_idx(phoneme_sequence, max_len: int = 320):
+def phoneme_to_idx(phoneme_sequence):
     idx_phoneme = []
     for phone in phoneme_sequence:
         idx_phoneme.append(mapped_phoneme[phone])
-    return len(idx_phoneme), np.array(padder(idx_phoneme, max_len))
+    return len(idx_phoneme), np.array(idx_phoneme)
 
 
 def idx_to_phoneme(sequence):

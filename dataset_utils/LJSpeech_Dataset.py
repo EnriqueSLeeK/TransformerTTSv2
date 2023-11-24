@@ -4,6 +4,8 @@ import numpy as np
 import torch.utils.data
 import torch
 #from dataset_utils.phoneme_to_idx import phoneme_to_idx
+#import dataset_utils.batch_collate_fn as collate
+import batch_collate_fn as collate
 from phoneme_to_idx import phoneme_to_idx
 
 
@@ -26,7 +28,9 @@ class LJSPeech_Dataset(torch.utils.data.Dataset):
             with open(os.path.join(root_dir, orig_dur)) as f:
                 for line in f:
                     splitted = line.split('|')
-                    self.audio_orig_duration[os.path.join(root_dir, mel_dir, splitted[0] + ".npy")] = int(splitted[1])
+                    self.audio_orig_duration[os.path.join(root_dir,
+                                                          mel_dir,
+                                                          splitted[0].replace('.wav', '') + ".npy")] = int(splitted[1])
 
         with open(os.path.join(root_dir, data_file), 'r') as f:
             for line in f:
@@ -78,11 +82,20 @@ if __name__ == "__main__":
 
     train_loader = torch.utils.data.DataLoader(dataset=train_set,
                                                batch_size=5,
+                                               shuffle=False,
+                                               collate_fn=collate.collate_fn)
+    """
+    train_loader = torch.utils.data.DataLoader(dataset=train_set,
+                                               batch_size=5,
                                                shuffle=False)
+    """
 
     for spectogram, pack in enumerate(train_loader):
         # print(pack["mel"])
-        print(type(pack["mel"].permute(0, 2, 1)))
+        print(pack["mel"].permute(0, 2, 1).shape)
+        print(pack["phone"].shape)
+        print(pack['mel_seq_len'])
+        print(pack['phone_seq_len'])
         # print(pack["phone"].shape)
         print("----------------------")
         break
