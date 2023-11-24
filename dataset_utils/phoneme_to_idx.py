@@ -15,7 +15,7 @@ phoneme = ['<pad>', '<sos>', '<eos>',
            'OW2', 'OY0', 'OY1', 'OY2', 'P', 'R', 'S', 'SH', 'T', 'TH',
            'UH0', 'UH1', 'UH2', 'UW', 'UW0', 'UW1', 'UW2', 'V',
            'W', 'Y', 'Z', 'ZH',
-           '!', '?', ' ', '"', '\'', '.', ',']
+           '!', '?', ' ', '"', '\'', '.', ',', '..']
 # sos = start of sentence
 # eos = end of sentence
 
