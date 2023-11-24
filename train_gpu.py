@@ -9,6 +9,7 @@ from torch.profiler import profile, record_function, ProfilerActivity
 
 import eval
 import dataset_utils.LJSpeech_Dataset as dataset_object
+import dataset_utils.batch_collate_fn as collate
 import model.build as model_builder
 import model.Loss as loss
 
@@ -21,7 +22,8 @@ def dataloader_make(dataset, batch_size):
     dataloader = data_utils.DataLoader(dataset,
                                        batch_size=batch_size,
                                        num_workers=2,
-                                       shuffle=True)
+                                       shuffle=True,
+                                       collate_fn=collate.collate_fn)
     return dataloader
 
 
