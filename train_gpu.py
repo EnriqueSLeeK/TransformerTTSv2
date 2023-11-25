@@ -96,12 +96,13 @@ def training_loop_gpu(model,
             data["mel"] = data["mel"].permute(0, 2, 1)
 
             # Put an start of sequence on the mel
-            data["mel"] = torch.cat(
+            data["mel_input"] = torch.cat(
                     [torch.zeros(data["phone"].shape[0], 1, config["n_mel"]),
                      data["mel"][:, :-1, :]],
                     dim=1)
 
             _, _, model_loss = model(phoneme=data["phone"].cuda(),
+                                     mel_input=data["mel_input"].cuda(),
                                      mel=data["mel"].cuda(),
                                      phone_seq_len=data["phone_seq_len"].cuda(),
                                      mel_seq_len=data["mel_seq_len"].cuda())

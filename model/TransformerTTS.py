@@ -5,7 +5,6 @@ import model.PreNet as prenet
 import numpy as np
 from g2p_en import G2p
 
-from dataset_utils.phoneme_to_idx import get_pad_index
 from dataset_utils.phoneme_to_idx import phoneme_to_idx
 from dataset_utils.mask_from_seq_len import stop_from_seq_lengths
 from dataset_utils.mask_from_seq_len import mask_from_seq_length
@@ -136,8 +135,7 @@ class TransformerTTS(nn.Module):
         super(TransformerTTS, self).__init__()
 
         self.embedding = nn.Embedding(vocab_size,
-                                      config["embed_dim"],
-                                      padding_idx=get_pad_index())
+                                      config["embed_dim"])
 
         self.network_prenet = NetWorkPreNet(config)
 
@@ -215,11 +213,12 @@ class TransformerTTSWithLoss(nn.Module):
 
     def forward(self,
                 phoneme,
+                mel_input,
                 mel,
                 phone_seq_len,
                 mel_seq_len):
         mel_linear, mel_out, token = self.model(phoneme=phoneme,
-                                                mel=mel,
+                                                mel=mel_input,
                                                 phone_seq_len=phone_seq_len,
                                                 mel_seq_len=mel_seq_len)
 
