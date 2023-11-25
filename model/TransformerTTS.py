@@ -266,14 +266,15 @@ class TTSInference(nn.Module):
                 text: str,
                 max_length: int = 800,
                 stop_token_threshold: int = 1e3,
-                n_mel: int = 80):
+                n_mel: int = 80,
+                device: str = 'cuda'):
         self.model.eval()
         # Prepare text
-        seq_len, phoneme = self.preprocess_text(text, 'cuda')
+        seq_len, phoneme = self.preprocess_text(text, device)
 
         # Prepare mel
         mel_len, mel = self.mel_add_start_token(n_mel,
-                                                text.device)
+                                                device)
 
         # Inference of the audio spectogram
         for _ in range(max_length):
