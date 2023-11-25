@@ -80,8 +80,8 @@ def training_loop_gpu(model,
         data = extract_data(checkpoint_file)
         model.model.load_state_dict(data['model_state_dict'])
         optimizer.load_state_dict(data['optimizer_state_dict'])
-        i = data['step']
-        loss_mean = data['train_loss']
+        i = int(data['step'])
+        loss_mean = float(data['train_loss'])
 
     epoch = int(i // 406.25)
 

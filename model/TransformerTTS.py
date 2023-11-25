@@ -26,7 +26,6 @@ class NetWorkPreNet(nn.Module):
                                                    dropout=config["dropout_prenet"])
 
         self.max_mel_time = config["max_mel_frames"]
-        self.max_phone = config["phoneme_max_sequence"]
 
         self.positional_encoding = nn.Embedding(num_embeddings=self.max_mel_time,
                                                 embedding_dim=config["pos_embed_dim"])
