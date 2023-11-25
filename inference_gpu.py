@@ -20,7 +20,7 @@ def inference(model):
         model.model.load_state_dict(data['model_state_dict'])
 
     mel = model("Hello world!")
-    mel = mel.transpose(0, 2, 1)[0]
+    mel = mel.permute(0, 2, 1)[0].cpu().numpy()
 
     fig, ax = plt.subplots()
     img = librosa.display.specshow(mel, x_axis='time',
