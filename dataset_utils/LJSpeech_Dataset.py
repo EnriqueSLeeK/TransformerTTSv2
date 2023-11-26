@@ -53,7 +53,7 @@ class LJSPeech_Dataset(torch.utils.data.Dataset):
         audio_file = self.audio_files[index]
 
         # Unpack
-        mel_spectogram = torch.from_numpy(np.load(audio_file)[0])
+        mel_spectogram = torch.from_numpy(np.load(audio_file))
 
         seq_len, idx = phoneme_to_idx(self.phoneme[index])
         phoneme = torch.from_numpy(idx)
