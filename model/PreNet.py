@@ -15,17 +15,16 @@ class DecoderPreNet(nn.Module):
         self.fc1 = nn.Linear(input_dim, hidden_dim)
         self.fc2 = nn.Linear(hidden_dim, hidden_dim)
 
-        self.activation = nn.ReLU()
         self.dropout = dropout
 
     def forward(self, x):
 
-        x = self.activation(self.fc1(x))
+        x = nnf.relu(self.fc1(x))
         x = nnf.dropout(x,
                         p=self.dropout,
                         training=True)
 
-        x = self.activation(self.fc2(x))
+        x = nnf.relu(self.fc2(x))
         x = nnf.dropout(x,
                         p=self.dropout,
                         training=True)
@@ -41,7 +40,7 @@ class ConvEncoderPreNet(nn.Module):
                  kernel_size: int,
                  stride: int = 1,
                  dilation: int = 1,
-                 dropout: float = 0.1):
+                 dropout: float = 0.5):
         super(ConvEncoderPreNet, self).__init__()
 
         self.conv = nn.Conv1d(in_channels=in_channel,
@@ -72,6 +71,8 @@ class EncoderPreNet(nn.Module):
                  dropout: float):
         super(EncoderPreNet, self).__init__()
 
+        self.linear = nn.Linear(embed_dim, embed_dim)
+
         self.convL1 = ConvEncoderPreNet(in_channel=embed_dim,
                                         out_channel=embed_dim,
                                         kernel_size=kernel_size)
@@ -88,6 +89,7 @@ class EncoderPreNet(nn.Module):
                                     out_dim)
 
     def forward(self, x):
+        x = x.linear(x)
 
         x = x.permute(0, 2, 1)
 

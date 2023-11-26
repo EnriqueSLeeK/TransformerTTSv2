@@ -141,6 +141,8 @@ class TransformerTTS(nn.Module):
 
         self.network_postnet = NetWorkPostNet(config)
 
+        self.mem_norm = nn.LayerNorm(config["linear_dim"])
+
         self.encoder = encoder
         self.decoder = decoder
 
@@ -184,6 +186,9 @@ class TransformerTTS(nn.Module):
         encoded = self.encode(phoneme_embed=data["encoder_input"],
                               attn_mask=data["src_mask"],
                               key_padding_mask=data["pad_src_mask"])
+
+        encoded = self.mem_norm(encoded)
+
         decoded = self.decode(mel=data["decoder_input"],
                               encoded=encoded,
                               mem_mask=data["memory_mask"],

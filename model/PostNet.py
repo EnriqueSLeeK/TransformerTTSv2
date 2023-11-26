@@ -27,7 +27,7 @@ class PostNetConv(nn.Module):
                  kernel_size: int,
                  stride: int = 1,
                  dilation: int = 1,
-                 dropout: float = 0.3,
+                 dropout: float = 0.5,
                  activation=nn.Tanh()):
 
         super(PostNetConv, self).__init__()
@@ -46,7 +46,10 @@ class PostNetConv(nn.Module):
     def forward(self, x):
         x = self.conv(x)
         x = self.batchNorm(x)
-        x = self.activation(x)
+
+        if self.activation is not None:
+            x = self.activation(x)
+
         x = self.dropout(x)
 
         return x
@@ -86,7 +89,8 @@ class PostNet(nn.Module):
                                       kernel_size=kernel_size,
                                       stride=stride,
                                       dilation=dilation,
-                                      dropout=dropout)
+                                      dropout=dropout,
+                                      activation=None)
 
     def forward(self, x):
 
