@@ -60,7 +60,13 @@ def mel_spectrogram(y,
 
     global mel_basis, hann_window
     if fmax not in mel_basis:
-        mel = librosa_mel_fn(sampling_rate, n_fft, num_mels, fmin, fmax)
+
+        mel = librosa_mel_fn(sr=sampling_rate,
+                             n_fft=n_fft,
+                             n_mels=num_mels,
+                             fmin=fmin,
+                             fmax=fmax)
+
         mel_basis[str(fmax)+'_'+str(y.device)] = torch.from_numpy(mel).float().to(y.device)
         hann_window[str(y.device)] = torch.hann_window(win_size).to(y.device)
 
@@ -68,7 +74,7 @@ def mel_spectrogram(y,
     y = y.squeeze(1)
 
     spec = torch.stft(y, n_fft, hop_length=hop_size, win_length=win_size, window=hann_window[str(y.device)],
-                      center=center, pad_mode='reflect', normalized=False, onesided=True)
+                      center=center, pad_mode='reflect', normalized=False, onesided=True, return_complex=False)
 
     spec = torch.sqrt(spec.pow(2).sum(-1)+(1e-9))
 
@@ -105,7 +111,7 @@ def export_mel(file_name: str,
 def preprocess_audio(audio_list,
                      config):
 
-    os.makedirs(os.path.join(config["spectogram_dir"],
+    os.makedirs(os.path.join(config["root_dir"],
                              "mel_spectrogram"),
                 exist_ok=True)
 
@@ -130,21 +136,21 @@ def preprocess_audio(audio_list,
             waveform = torch.FloatTensor(waveform)
             waveform = waveform.unsqueeze(0)
 
-            mel = mel_spectrogram(waveform,
-                                  config['n_fft'],
-                                  config['n_mel'],
-                                  config['sample_rate'],
-                                  config['hop_size'],
-                                  config['win_size'],
-                                  config['fmin'],
-                                  config['fmax'],
-                                  center=False)
+            specto = mel_spectrogram(waveform,
+                                     config['n_fft'],
+                                     config['n_mel'],
+                                     config['sample_rate'],
+                                     config['hop_size'],
+                                     config['win_size'],
+                                     config['fmin'],
+                                     config['fmax'],
+                                     center=False)[0]
 
             # mel = pad_audio(mel, (waveform.shape[0] // hop_size) + 1)
             # Mel shape => [mel bands, mel frames]
-            f.write(f"{audio_file.split('/')[-1]}|{mel.shape[1]}\n")
+            f.write(f"{audio_file.split('/')[-1]}|{specto.shape[-1]}\n")
 
             export_mel(audio_file,
-                       os.path.join(config["spectogram_dir"],
+                       os.path.join(config["root_dir"],
                                     "mel_spectrogram"),
-                       mel)
+                       specto)

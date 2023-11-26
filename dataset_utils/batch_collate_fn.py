@@ -14,6 +14,7 @@ def collate_fn(batch):
     batch_size = len(batch)
     mel_max_len = batch_max_len(batch, 'mel')
     phone_max_len = batch_max_len(batch, 'phone')
+    print(f"mel: {mel_max_len} | phone: {phone_max_len}")
 
     for idx in range(batch_size):
         batch[idx]['mel'] = torch.nn.functional.pad(

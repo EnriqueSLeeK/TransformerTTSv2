@@ -3,10 +3,10 @@ import os.path
 import numpy as np
 import torch.utils.data
 import torch
-from dataset_utils.phoneme_to_idx import phoneme_to_idx
-import dataset_utils.batch_collate_fn as collate
-# import batch_collate_fn as collate
-# from phoneme_to_idx import phoneme_to_idx
+#from dataset_utils.phoneme_to_idx import phoneme_to_idx
+#import dataset_utils.batch_collate_fn as collate
+import batch_collate_fn as collate
+from phoneme_to_idx import phoneme_to_idx
 
 
 # Both padded
@@ -52,7 +52,8 @@ class LJSPeech_Dataset(torch.utils.data.Dataset):
     def __getitem__(self, index):
         audio_file = self.audio_files[index]
 
-        mel_spectogram = torch.from_numpy(np.load(audio_file))
+        # Unpack
+        mel_spectogram = torch.from_numpy(np.load(audio_file)[0])
 
         seq_len, idx = phoneme_to_idx(self.phoneme[index])
         phoneme = torch.from_numpy(idx)
