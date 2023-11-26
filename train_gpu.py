@@ -98,6 +98,7 @@ def training_loop_gpu(model,
             k += 1
 
             optimizer.zero_grad()
+            model.zero_grad()
 
             data["mel"] = data["mel"].permute(0, 2, 1)
 
