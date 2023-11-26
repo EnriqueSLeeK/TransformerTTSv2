@@ -84,11 +84,13 @@ def training_loop_gpu(model,
         optimizer.load_state_dict(data['optimizer_state_dict'])
         i = int(data['step'])
         loss_mean = float(data['train_loss'])
+        print("Model checkpoint load")
 
     epoch = int(i // 406.25)
 
     checkpoint_step = config["checkpoint_step"]
     model.train()
+    print("Training")
     while (epoch <= config["epoch"]):
 
         for batch_idx, data in enumerate(train_loader):
@@ -119,6 +121,7 @@ def training_loop_gpu(model,
                 print(f'{i} step_loss_mean: {loss_mean / k}')
 
                 if i % checkpoint_step == 0:
+                    print("Evaluation")
                     loss_mean = model_loss / checkpoint_step
 
                     eval_mean_loss = eval.evaluate(model, train_loader, config)
