@@ -10,3 +10,4 @@ mel_spectrogram
 *.zip
 *.pt
 *.bin
+log_dir
