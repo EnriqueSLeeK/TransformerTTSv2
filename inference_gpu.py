@@ -4,6 +4,7 @@ import json
 import librosa
 import os
 import matplotlib.pyplot as plt
+import numpy as np
 
 import model.build as builder
 
@@ -34,6 +35,7 @@ def inference(model):
     ax.set(title='Mel-frequency spectrogram')
 
     fig.savefig("mel_fig2.png")
+    np.save("specto.npy", mel)
 
 
 
