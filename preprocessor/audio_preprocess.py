@@ -13,6 +13,9 @@ import librosa
 
 MAX_WAV_VALUE = 32768.0
 
+mel_basis = {}
+hann_window = {}
+
 
 def dynamic_range_compression(x, C=1, clip_val=1e-5):
     return np.log(np.clip(x, a_min=clip_val, a_max=None) * C)
