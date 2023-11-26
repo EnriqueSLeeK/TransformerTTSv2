@@ -75,6 +75,7 @@ def training_loop_gpu(model,
     checkpoint_file = os.path.join(config['checkpoint_dir'],
                                    'checkpoint.pt')
     i = 0
+    k = 0
     loss_mean = 0.0
 
     if (os.path.exists(checkpoint_file)):
@@ -92,6 +93,8 @@ def training_loop_gpu(model,
 
         for batch_idx, data in enumerate(train_loader):
             i += 1
+            k += 1
+
             optimizer.zero_grad()
 
             data["mel"] = data["mel"].permute(0, 2, 1)
@@ -113,26 +116,29 @@ def training_loop_gpu(model,
             loss_mean += model_loss.item()
 
             if i % 500 == 0:
-                print(f'{i} step_loss: {model_loss.item()}')
+                print(f'{i} step_loss_mean: {loss_mean / k}')
 
-            if i % checkpoint_step == 0:
-                loss_mean = model_loss / checkpoint_step
+                if i % checkpoint_step == 0:
+                    loss_mean = model_loss / checkpoint_step
 
-                eval_mean_loss = eval.evaluate(model, train_loader, config)
-                model.train()
+                    eval_mean_loss = eval.evaluate(model, train_loader, config)
+                    model.train()
 
-                save_model(step=i,
-                           model_state=model.model.state_dict(),
-                           optimizer_state=optimizer.state_dict(),
-                           dir_checkpoint=config["checkpoint_dir"],
-                           checkpoint_filename="checkpoint.pt",
-                           train_loss=loss_mean,
-                           test_loss=eval_mean_loss)
+                    save_model(step=i,
+                               model_state=model.model.state_dict(),
+                               optimizer_state=optimizer.state_dict(),
+                               dir_checkpoint=config["checkpoint_dir"],
+                               checkpoint_filename="checkpoint.pt",
+                               train_loss=loss_mean,
+                               test_loss=eval_mean_loss)
 
-                logger.add_scalar("Eval Loss", eval_mean_loss, global_step=i)
-                print("Checkpoint!")
+                    logger.add_scalar("Eval Loss",
+                                      eval_mean_loss,
+                                      global_step=i)
+                    print("Checkpoint!")
 
-                loss_mean = 0.0
+                    loss_mean = 0.0
+                    k = 0
 
 
 def main_gpu(config):
