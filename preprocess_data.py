@@ -20,7 +20,7 @@ def get_json_config(dir: str, config_file: str):
     return config
 
 
-def main(arg_dict, audio_config):
+def main(arg_dict, config):
 
     os.makedirs(arg_dict["-output_dir"], exist_ok=True)
 
@@ -32,12 +32,7 @@ def main(arg_dict, audio_config):
                                   "|",
                                   output_dir=arg_dict["-output_dir"])
 
-    audio_prep.preprocess_audio(wav_list,
-                                audio_config["sample_rate"],
-                                audio_config["n_fft"],
-                                audio_config["hop_size"],
-                                audio_config["n_mel"],
-                                audio_config["max_mel_frames"])
+    audio_prep.preprocess_audio(wav_list, config)
 
 
 if __name__ == "__main__":
@@ -53,5 +48,5 @@ if __name__ == "__main__":
     parser.parse()
 
     arg_dict = parser.argument
-    audio_config = get_json_config("config", arg_dict["-config_file"])
-    main(arg_dict, audio_config)
+    config = get_json_config("config", arg_dict["-config_file"])
+    main(arg_dict, config)
