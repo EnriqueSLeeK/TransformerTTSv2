@@ -89,7 +89,7 @@ class EncoderPreNet(nn.Module):
                                     out_dim)
 
     def forward(self, x):
-        x = x.linear(x)
+        x = self.linear(x)
 
         x = x.permute(0, 2, 1)
 
