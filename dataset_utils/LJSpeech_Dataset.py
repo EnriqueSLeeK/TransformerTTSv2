@@ -3,10 +3,10 @@ import os.path
 import numpy as np
 import torch.utils.data
 import torch
-#from dataset_utils.phoneme_to_idx import phoneme_to_idx
-#import dataset_utils.batch_collate_fn as collate
-import batch_collate_fn as collate
-from phoneme_to_idx import phoneme_to_idx
+from dataset_utils.phoneme_to_idx import phoneme_to_idx
+import dataset_utils.batch_collate_fn as collate
+#import batch_collate_fn as collate
+#from phoneme_to_idx import phoneme_to_idx
 
 
 # Both padded
