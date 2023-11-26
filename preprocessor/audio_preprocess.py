@@ -119,13 +119,16 @@ def preprocess_audio(audio_list,
         for audio_file in audio_list:
             # Load and resample the audio
             waveform, sample_rate = librosa.load(audio_file,
-                                                 config['sample_rate'])
+                                                 sr=config['sample_rate'])
             waveform = waveform / MAX_WAV_VALUE
             waveform = normalize(waveform) * 0.95
 
             # Trim audio removing silence at the front and at the
             # end of the audio
             waveform, _ = librosa.effects.trim(waveform)
+
+            waveform = torch.FloatTensor(waveform)
+            waveform = waveform.unsqueeze(0)
 
             mel = mel_spectrogram(waveform,
                                   config['n_fft'],
