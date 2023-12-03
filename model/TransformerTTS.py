@@ -119,7 +119,7 @@ class NetWorkPostNet(nn.Module):
         mel_projection = self.mel_linear(x)
         mel_construction = self.postnet(mel_projection)
 
-        stop = self.stop_linear(x)
+        stop = self.stop_linear(mel_projection)
 
         return (mel_projection,
                 mel_projection + mel_construction,
