@@ -1,0 +1,151 @@
+/* Importa a fonte 'Roboto' do Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+/* Estilos globais para o body e html, afetando toda a página */
+body, html {
+  font-family: 'Roboto', sans-serif; 
+  text-align: center; 
+  margin: 0; 
+  overflow-y: auto; 
+  background-image: url('/static/images/background-image.png'); 
+  background-size: cover; 
+  background-position: center; 
+  padding-top: 60px; 
+}
+
+/* Estilos para a barra de navegação superior */
+.top-nav {
+  width: 100%; 
+  background-color: #f8f8f8;
+  padding: 10px 0; 
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
+  position: fixed; 
+  top: 0; 
+  left: 0; 
+  z-index: 1000; 
+}
+
+/* Estilos para os links dentro da barra de navegação */
+.top-nav a {
+  text-decoration: none; 
+  color: #333;
+  margin: 0 15px; 
+  font-family: 'Roboto', sans-serif; 
+  font-size: 1em; 
+}
+
+/* Estilos para o container principal, afetando a disposição dos elementos internos */
+.container {
+  display: flex; 
+  flex-direction: column; 
+  align-items: center;
+  justify-content: flex-start; 
+  width: 100%; 
+  padding: 60px 20px 20px; 
+  box-sizing: border-box; 
+}
+
+/* Estilos específicos para o container da página de tutorial */
+.tutorial-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh; /* 使得容器至少有整个视口的高度 */
+  padding: 60px 20px; /* 可以根据需要调整上下内边距 */
+}
+
+/* Estilos para os títulos h1 em toda a página */
+h1 {
+  font-weight: 700; 
+  font-size: 3em; 
+  color: #000000;
+  margin-bottom: 1em; 
+}
+
+
+/* Estilos para o wrapper de entrada (onde o usuário insere o texto) */
+.input-wrapper {
+  display: flex;
+  justify-content: center; 
+  align-items: flex-end; 
+  width: 100%; 
+  max-width: 600px; 
+  margin: 0 auto; 
+}
+
+/* Estilos para o campo de entrada de texto */
+#text-input {
+  flex: 1; 
+  margin-right: 20px; 
+  flex-basis: 50%; 
+  flex-grow: 1; 
+  padding: 10px; 
+  font-size: 1em; 
+}
+
+/* Estilos para o botão 'Gerar' */
+#generate-button {
+  mix-blend-mode: multiply; 
+  width: 50px; 
+  height: auto; 
+  align-self: center; 
+}
+
+/* Estilos para a imagem decorativa na parte inferior da página */
+.decorative-image {
+  mix-blend-mode: multiply; 
+  position: fixed; 
+  bottom: 0; 
+  left: 0;
+  width: 100%; 
+  opacity: 1.0; 
+  height: 50%; 
+  z-index: -1; 
+}
+
+/* Estilos para centralizar o texto do placeholder dentro do campo de entrada */
+#text-input::placeholder {
+  text-align: center; 
+  opacity: 1; 
+}
+
+/* Estilos para o Internet Explorer */
+#text-input:-ms-input-placeholder {
+  text-align: center; 
+}
+
+#text-input::-ms-input-placeholder {
+  text-align: center; 
+}
+
+/* Estilos para parágrafos dentro do .container */
+.container p {
+  text-align: center; 
+  max-width: 600px; 
+  margin-bottom: 1em; 
+}
+
+/* Estilos para o fundo dos textos que facilita a leitura */
+.text-background {
+  background-color: rgba(255, 255, 255, 0.8); 
+  padding: 20px; 
+  border-radius: 10px; 
+  margin: 10px 0; 
+  max-width: 600px; 
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
+  text-align: center; 
+}
+
+.button-container {
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+  justify-content: center; 
+}
+
+#button-label {
+  font-size: 1.2em; 
+  font-weight: 700; 
+  margin-bottom: 4px; 
+}

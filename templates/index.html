@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transformer TTS</title>
+    <!-- Link para a folha de estilos CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <!-- Barra de navegação superior -->
+    <nav class="top-nav">
+        <a href="/">Transformer TTS</a> <!-- Link para a página inicial -->
+        <a href="/tutorial">tutorial</a> <!-- Link para a página de tutorial -->
+    </nav>
+
+    <!-- Container principal que centraliza o conteúdo na página -->
+    <div class="container">
+        <h1>Transformer TTS</h1> <!-- Título principal da aplicação -->
+        <div class="input-wrapper">
+            <input type="text" id="text-input" placeholder="Insira o texto" /> <!-- Campo para o usuário inserir texto -->
+            <div class="button-container">
+                <span id="button-label">Gerar</span>
+                <input type="image" id="generate-button" src="{{ url_for('static', filename='images/button_icon.png') }}" alt="Gerar" />
+            </div>
+            <span id="loading-message" style="display: none;">Gerando...</span>
+            <audio id="audio-player" controls style="display: none;"></audio>           
+        </div>
+    </div>
+    <!-- Script JavaScript que contém a lógica de interação do usuário -->
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    
+    <!-- Imagem decorativa no rodapé da página -->
+    <img src="static/images/Imagem decorativa.png" class="decorative-image" alt="Imagem decorativa">
+</body>
+</html>

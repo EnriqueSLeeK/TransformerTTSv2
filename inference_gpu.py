@@ -2,6 +2,7 @@
 import torch
 import json
 import librosa
+import sys
 import os
 from hifi_gan.inference_e2e import direct_inference
 import matplotlib.pyplot as plt
@@ -32,14 +33,13 @@ def inference_test(model):
                                    y_axis='mel', sr=22050,
                                    fmax=8000, ax=ax)
 
-    fig.colorbar(img, ax=ax, format='%+.3f dB')
-
     ax.set(title='Mel-frequency spectrogram')
 
     fig.savefig(os.path.join(out, "mel_fig2.png"))
     np.save(os.path.join(out, "specto.npy"), mel)
     direct_inference(mel)
 
+config = None
 
 def inference_text(model, text):
     out = 'output_dir'
@@ -81,6 +81,9 @@ def inference_main(config):
 
 
 def load_model():
+    global config
+    with open('config/hparam.json', 'r') as f:
+        config = json.load(f)
     inference_model = builder.build_inference_model(config).cuda()
 
     checkpoint_file = os.path.join(config['checkpoint_dir'],

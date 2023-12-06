@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorial</title>
+    <!-- Link para a folha de estilos CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <!-- Barra de navegação no topo da página -->
+    <nav class="top-nav">
+        <a href="/">pagina inicial</a> <!-- Link para a página inicial -->
+        <a href="/tutorial">tutorial</a> <!-- Link atual, leva para a página de tutorial -->
+    </nav>
+
+    <!-- Container específico para a página de tutorial -->
+    <div class="tutorial-container">
+        <h1>Tutorial</h1> <!-- Título da página de tutorial -->
+        <div class="text-background">
+            <!-- Seção de introdução do tutorial -->
+            <h2>Como Usar o Transformer TTS</h2> <!-- Subtítulo do tutorial -->
+            <section>
+                <h3>Introdução</h3> <!-- Título da seção de introdução -->
+                <p>Bem-vindo ao Transformer TTS, uma plataforma de conversão de texto em fala simples e fácil de usar. Siga os passos abaixo para transformar qualquer texto em uma fala natural e compreensível.</p> <!-- Descrição da seção de introdução -->
+            </section>
+            <!-- Seção com instruções preliminares antes de começar a usar o sistema -->
+            <section>
+                <h3>Antes de Começar</h3> <!-- Título da seção de pré-requisitos -->
+                <p>Certifique-se de que seu dispositivo esteja conectado à internet e que seu navegador esteja atualizado para garantir a melhor experiência.</p> <!-- Descrição dos pré-requisitos -->
+            </section>
+            <!-- Seção com os passos detalhados para o uso do sistema -->
+            <section>
+                <h3>Passos para Uso</h3> <!-- Título da seção de passos -->
+                <h4>Primeiro Passo: Inserir Texto</h4> <!-- Título do primeiro passo -->
+                <p>Localize a caixa de entrada de texto na página principal.</p> <!-- Descrição do primeiro passo -->
+                <p>Digite o texto que você deseja converter para fala na caixa de entrada.</p> 
+                
+                <h4>Segundo Passo: Gerar a Fala</h4> <!-- Título do segundo passo -->
+                <p>Após digitar o texto, clique no botão “Gerar” ao lado da caixa.</p> <!-- Descrição do segundo passo -->
+                <p>O sistema processará seu pedido e converterá o texto em fala.</p> 
+                
+                <h4>Terceiro Passo: Ouvir o Resultado da Conversão</h4> <!-- Título do terceiro passo -->
+                <p>Após a geração da fala, você poderá ouvi-la clicando no botão de reprodução.</p> <!-- Descrição do terceiro passo -->
+                <p>Se desejar salvar o arquivo de áudio, clique no botão “Baixar”.</p>
+            </section>
+        </div>
+    </div>
+    
+    <!-- Script JavaScript necessário para a interatividade da página -->
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <!-- Imagem decorativa no rodapé da página -->
+    <img src="{{ url_for('static', filename='images/Imagem decorativa.png') }}" class="decorative-image" alt="Imagem decorativa">
+</body>
+</html>
