@@ -64,4 +64,4 @@ def build_inference_model(config: dict):
 
 
 def wrap_inference_mode(base_model):
-    return model_builder.TTSInference(model)
+    return model_builder.TTSInference(base_model)
