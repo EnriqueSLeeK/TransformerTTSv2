@@ -12,3 +12,4 @@ mel_spectrogram
 *.bin
 log_dir
 generator_v1
+output_dir
