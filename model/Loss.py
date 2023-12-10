@@ -1,5 +1,6 @@
 import torch.nn as nn
 import importlib
+import torch
 
 # Check if poptorch exist
 poptorch_here = importlib.util.find_spec("poptorch")
