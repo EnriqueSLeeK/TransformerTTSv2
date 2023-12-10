@@ -7,6 +7,7 @@ import torch.utils.data as data_utils
 import torch.optim
 from torch.utils.tensorboard import SummaryWriter
 from torch.profiler import profile, record_function, ProfilerActivity
+import inference_gpu
 
 import eval
 import dataset_utils.LJSpeech_Dataset as dataset_object
@@ -125,9 +126,9 @@ def training_loop_gpu(model,
                     print("Evaluation")
                     loss_mean = model_loss / checkpoint_step
 
+                    inference_gpu.inference_test()
                     eval_mean_loss = eval.evaluate(model, train_loader, config)
                     model.train()
-
                     save_model(step=i,
                                model_state=model.model.state_dict(),
                                optimizer_state=optimizer.state_dict(),

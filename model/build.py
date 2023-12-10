@@ -61,3 +61,7 @@ def build_inference_model(config: dict):
 
     model_inference = model_builder.TTSInference(model)
     return model_inference
+
+
+def wrap_inference_mode(base_model):
+    return model_builder.TTSInference(model)
