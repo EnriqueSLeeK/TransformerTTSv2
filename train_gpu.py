@@ -126,7 +126,7 @@ def training_loop_gpu(model,
                     print("Evaluation")
                     loss_mean = model_loss / checkpoint_step
 
-                    inference_gpu.inference_test()
+                    inference_gpu.inference_train(model.model)
                     eval_mean_loss = eval.evaluate(model, train_loader, config)
                     model.train()
                     save_model(step=i,
