@@ -65,7 +65,7 @@ class TransformerTTSLossGpu(nn.Module):
 
     def __init__(self,
                  criterion1=nn.MSELoss(),
-                 criterion2=nn.BCEWithLogitsLoss(pos_weight=7.5)):
+                 criterion2=nn.BCEWithLogitsLoss(pos_weight=torch.tensor(7.5))):
         super(TransformerTTSLossGpu, self).__init__()
         self.criterion1 = criterion1
         self.criterion2 = criterion2
