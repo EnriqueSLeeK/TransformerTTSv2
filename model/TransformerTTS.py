@@ -280,6 +280,7 @@ class TTSInference(nn.Module):
         mel_len, mel = self.mel_add_start_token(n_mel,
                                                 device)
 
+        stop_token = None
         # Inference of the audio spectogram
         for _ in range(max_length):
             mel_postnet, mel_linear, stop_token = self.model(phoneme,
@@ -295,7 +296,7 @@ class TTSInference(nn.Module):
             else:
                 mel_len = torch.tensor(mel.shape[1]).unsqueeze(0).cuda()
 
-        return mel
+        return mel, stop_token
 
 
 if __name__ == "__main__":

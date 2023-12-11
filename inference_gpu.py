@@ -14,7 +14,7 @@ def extract_data(checkpoint_file):
     return torch.load(checkpoint_file)
 
 
-def export_data(mel, out='output_dir'):
+def export_data(mel, stop_token, out='output_dir'):
     os.makedirs(out, exist_ok=True)
     fig, ax = plt.subplots()
 
@@ -24,16 +24,20 @@ def export_data(mel, out='output_dir'):
 
     ax.set(title='Mel-frequency spectrogram')
 
-    fig.savefig(os.path.join(out, "mel_fig2.png"))
+    fig.savefig(os.path.join(out, "mel_fig.png"))
     np.save(os.path.join(out, "specto.npy"), mel)
+    plt.close()
+
+    plt.plot(torch.sigmoid(stop_token))
+    plt.savefig(os.path.join(out, "stop_token.png"))
     plt.close()
 
 
 def inference_train(model):
     model = builder.wrap_inference_mode(model).cuda()
-    mel = model("Hello world!")
+    mel, stop = model("Hello world!")
     mel = mel.permute(0, 2, 1)[0].cpu().numpy()
-    export_data(mel)
+    export_data(mel, stop_token=stop)
 
 
 def inference_test(model):
@@ -43,9 +47,9 @@ def inference_test(model):
         data = extract_data(checkpoint_file)
         model.model.load_state_dict(data['model_state_dict'])
 
-    mel = model("Hello world!")
+    mel, stop = model("Hello world!")
     mel = mel.permute(0, 2, 1)[0].cpu().numpy()
-    export_data(mel)
+    export_data(mel, stop_token=stop)
     direct_inference(mel)
 
 
@@ -59,10 +63,10 @@ def inference_text(model, text):
         data = extract_data(checkpoint_file)
         model.model.load_state_dict(data['model_state_dict'])
 
-    mel = model(text)
+    mel, stop = model(text)
     mel = mel.permute(0, 2, 1)[0].cpu().numpy()
 
-    export_data(mel)
+    export_data(mel, stop_token=stop)
     direct_inference(mel)
 
 
