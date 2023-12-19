@@ -55,7 +55,6 @@ class NetWorkPreNet(nn.Module):
 
         # phoneme dim => [batch_size, seq_len, embed]
         # mel => [batch_size, mel_frames, mel_bands]
-
         encoder_input = self.prenet_encoder(phoneme)
         decoder_input = self.prenet_decoder(mel)
 
@@ -203,9 +202,6 @@ class TransformerTTS(nn.Module):
 
         mel_linear = mel_linear.masked_fill(bool_mel_mask, 0)
         mel_output = mel_output.masked_fill(bool_mel_mask, 0)
-
-        stop_token = stop_token.masked_fill(
-                bool_mel_mask[:, :, 0].unsqueeze(-1), 1e3).squeeze(2)
 
         return (mel_linear, mel_output, stop_token)
 

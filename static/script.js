@@ -1,4 +1,3 @@
-
 document.getElementById('generate-button').onclick = function() {
 
   var userInput = document.getElementById('text-input').value;
@@ -6,6 +5,17 @@ document.getElementById('generate-button').onclick = function() {
   // Mostra a mensagem de carregamento
   document.getElementById('loading-message').style.display = 'block';
 
+  // Função para mostrar as imagens
+  function showImages() {
+  var leftImagePlaceholder = document.getElementById('left-image-placeholder');
+  var rightImagePlaceholder = document.getElementById('right-image-placeholder');
+
+  leftImagePlaceholder.innerHTML = '<img src="/static/images/leftImage.png" alt="leftImage" />';
+  rightImagePlaceholder.innerHTML = '<img src="/static/images/rightImage.png" alt="rightImage" />';
+
+  leftImagePlaceholder.style.display = 'block';
+  rightImagePlaceholder.style.display = 'block';
+}
 
   fetch('/generate_audio', {
     method: 'POST', 
@@ -24,6 +34,7 @@ document.getElementById('generate-button').onclick = function() {
     audioPlayer.style.display = 'block';
     audioPlayer.load(); // Carrega o áudio
     audioPlayer.play(); // Começa a reprodução
+    showImages();
   })
   .catch(err => {
     console.error(err);

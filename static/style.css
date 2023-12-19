@@ -36,6 +36,7 @@ body, html {
 
 /* Estilos para o container principal, afetando a disposição dos elementos internos */
 .container {
+  position: relative;
   display: flex; 
   flex-direction: column; 
   align-items: center;
@@ -51,8 +52,8 @@ body, html {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 100vh; /* 使得容器至少有整个视口的高度 */
-  padding: 60px 20px; /* 可以根据需要调整上下内边距 */
+  min-height: 100vh;
+  padding: 60px 20px; 
 }
 
 /* Estilos para os títulos h1 em toda a página */
@@ -72,6 +73,7 @@ h1 {
   width: 100%; 
   max-width: 600px; 
   margin: 0 auto; 
+  gap: 20px;
 }
 
 /* Estilos para o campo de entrada de texto */
@@ -99,8 +101,8 @@ h1 {
   bottom: 0; 
   left: 0;
   width: 100%; 
-  opacity: 1.0; 
-  height: 50%; 
+  opacity: 1; 
+  height: 35%; 
   z-index: -1; 
 }
 
@@ -148,4 +150,36 @@ h1 {
   font-size: 1.2em; 
   font-weight: 700; 
   margin-bottom: 4px; 
+}
+
+.images-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.image-placeholder {
+  position: fixed; 
+  bottom: 5px;
+  z-index: 10; 
+  display: none; 
+  width: 300px; 
+  height: 300px; 
+}
+
+.image-placeholder img {
+  width: 100%;  
+  height: 100%; 
+  object-fit: contain;
+}
+
+#left-image-placeholder {
+  left: 50%; 
+  transform: translateX(-110%);
+}
+
+#right-image-placeholder {
+  right: 50%;
+  transform: translateX(110%); 
 }

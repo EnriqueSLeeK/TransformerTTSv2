@@ -26,6 +26,12 @@
             <span id="loading-message" style="display: none;">Gerando...</span>
             <audio id="audio-player" controls style="display: none;"></audio>           
         </div>
+
+        <div class="images-container">
+            <div id="left-image-placeholder" class="image-placeholder"></div>
+            <div id="right-image-placeholder" class="image-placeholder"></div>
+        </div>
+        
     </div>
     <!-- Script JavaScript que contém a lógica de interação do usuário -->
     <script src="{{ url_for('static', filename='script.js') }}"></script>
